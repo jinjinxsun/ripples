@@ -31,7 +31,7 @@
 				
 			window.onload = function() {
 				
-				var C = 0.95;
+				var C = 1;
 	
 				c_canvas = document.getElementById("c");
 				
@@ -51,6 +51,12 @@
 			
 				context.fillStyle = "#56A5EC";
 				context.fillRect(0, 0, canvasWidth, canvasHeight);
+				
+				context.fillStyle = "#FFFFFF";
+				context.textAlign = "center";
+				context.textBaseline = "bottom";
+				context.font = "30px Sans-Serif";
+				context.fillText("Click anywhere to create ripples", canvasWidth/2, canvasHeight/2);
 			
 				c_canvas.addEventListener("click", draw, false);
 				
