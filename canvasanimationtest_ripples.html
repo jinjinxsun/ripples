@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+	</head>
+
+	<body style ="background-color:#000000;">
+
+		<canvas id="c">
+		Your browser does not support HTML5 Canvas ): 
+		</canvas>
+		
+		<script>
+		<!--
+			var radius = 3;
+			var x = 0;
+			var y = 0;
+			var alpha = 1;
+			var color = null;
+			var count = -1;
+			var ripples = new Array();
+			
+			var context;
+			var c_canvas;
+			var intervalID = null;
+			
+			var canvasWidth = 500;
+			var canvasHeight = 500;
+				
+			window.onload = function() {
+				
+				var C = 0.95;
+	
+				c_canvas = document.getElementById("c");
+				
+				var viewportWidth = window.innerWidth;
+				var viewportHeight = window.innerHeight;
+				
+				canvasWidth = viewportWidth * C;
+				canvasHeight = viewportHeight * C;
+				
+				c_canvas.style.position = "fixed";
+				c_canvas.setAttribute("width", canvasWidth);
+				c_canvas.setAttribute("height", canvasHeight);
+				c_canvas.style.top = (viewportHeight - canvasHeight) / 2 + "px";
+				c_canvas.style.left = (viewportWidth - canvasWidth) / 2 + "px";
+				
+				context = c_canvas.getContext("2d");
+			
+				context.fillStyle = "#56A5EC";
+				context.fillRect(0, 0, canvasWidth, canvasHeight);
+			
+				c_canvas.addEventListener("click", draw, false);
+				
+			}
+			
+			function Ripple(x, y, radius, alpha, numRings) {
+				this.x = x;
+				this.y = y;
+				this.radius = radius;
+				this.alpha = alpha;
+				
+				this.numRings = Math.floor((Math.random()*6)+1);
+				
+				this.drawRipple = drawRipple;
+				
+				function drawRipple(){
+				
+					var numRings = this.numRings;
+					
+					for (var j=1; j<=numRings; j++) {
+					
+						context.beginPath();
+						context.arc(this.x, this.y, (2*j*j)+this.radius, 0, Math.PI*2, true);
+						context.closePath();
+					
+						color = "rgba(255, 255, 255, " + this.alpha + ")";
+						context.strokeStyle = color;
+						context.stroke();
+						
+					}
+				}
+			}
+			
+			function draw(c) {
+			
+				count += 1;
+				
+				x = c.pageX - c_canvas.offsetLeft;
+				y = c.pageY - c_canvas.offsetTop;
+				
+				radius = 1;
+				alpha = 1;
+				
+				ripples[count] = new Ripple(x, y, radius, alpha);
+				
+				currentRipple = ripples[count];
+				
+				currentRipple.drawRipple();
+				
+				clearInterval(intervalID);
+				intervalID = setInterval(fadein, 70);
+				
+			}
+			
+			function fadein(){
+					
+				context.clearRect(0, 0, canvasWidth, canvasHeight);
+				
+				context.fillStyle = "#56A5EC";
+				context.fillRect(0, 0, canvasWidth, canvasHeight);
+				
+				for (var i=0; i<=count; i++) {
+				
+					currentRipple = ripples[i];
+					
+					if (currentRipple.radius < 400) {
+						
+						currentRipple.radius += 3;
+						currentRipple.alpha = 1 - (currentRipple.radius / 400);
+						currentRipple.drawRipple();
+						
+						//context.fillStyle = "#000";
+						//context.fillText(radius[count], x, y);
+						//context.fillText(count, x, y+20);
+						
+						//context.clearRect(0, 0, 50, 30);
+						//context.fillText(i, 20, 20);
+						
+						//context.fillText(alphas.length, 20, 40);
+						
+					}
+					
+				}
+					
+			}
+			
+			//-->
+		</script>
+		
+	</body>
+
+</html>
+
